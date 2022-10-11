@@ -43,3 +43,4 @@ console.log(usuario);
 
 //la funcion allIn() al ser una funcion declarada esta en el protorype en cambio las otras al ser funciones
 // expresadas se encuentran en la construccion de la clase de esta manera presentan lexical binding al objeto .
+module.exports = Usuarios;
