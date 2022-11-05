@@ -9,13 +9,12 @@
     "title": "Mens Casual Slim Fit",
     "url": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
     "price": 15,
-    "id": 2
-  },
-  {
-    "title": "Mens Casual Slim Fit",
-    "url": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-    "price": 15,
     "id": 3
   },
-  { "title": "texto", "url": "dada", "price": 13, "id": 4 }
+  { "title": "texto", "url": "dada", "price": 13, "id": 4 },
+  { "title": "dada", "url": "doda", "price": 12, "id": 5 },
+  { "title": "dada", "url": "doda", "price": 12, "id": 6 },
+  { "title": "dada", "url": "doda", "price": 12, "id": 7 },
+  { "title": "dada", "url": "doda", "price": 12, "id": 8 },
+  { "title": "dada", "url": "doda", "price": 12, "id": 9 }
 ]

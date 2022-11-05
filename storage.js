@@ -1,3 +1,4 @@
+const { Console } = require("console");
 const { Module } = require("module");
 
 const fs = require("fs").promises;
@@ -39,11 +40,13 @@ class Storage {
     if (this.version !== version) await this.loadFile();
     let array = this.products;
     const maxIdConstant = (await this.maxIdItems()) + 1 || 0;
-    array.push({ title, url, price, id: maxIdConstant });
+    const objeto = { title, url, price, id: maxIdConstant };
+    array.push(objeto);
     this.products = array;
     this.saveFile();
     this.maxId = this.maxId + 1;
     this.increaseCount(1);
+    return objeto;
   }
 
   async saveFile() {
@@ -64,7 +67,8 @@ class Storage {
   async getById(version, id) {
     await this.loadFile(version);
     const producto = this.products.filter((item) => item.id === id);
-    return producto;
+
+    return producto || { error: "Id no encontrado" };
   }
   async deleteById(version, id) {
     await this.loadFile(version);
@@ -72,10 +76,31 @@ class Storage {
     this.saveFile();
     this.increaseCount(-1);
     this.versionUpdate();
+    return "Objeto Eliminado";
   }
   deleteAll() {
     this.products = [];
     this.saveFile();
+  }
+  async modifyById(version, id, objeto) {
+    await this.loadFile(version);
+    const resultado = this.products.findIndex((item) => {
+      return item.id === id;
+    });
+    if (resultado !== -1) {
+      this.products[resultado] = {
+        ...this.products[resultado],
+        title: objeto.title,
+        url: objeto.url,
+        price: objeto.price,
+      };
+      this.saveFile();
+      objeto = this.products[resultado];
+    } else {
+      objeto = { error: "No se encontro producto con ese id" };
+    }
+    console.log("Objeto Modificado".gray, objeto);
+    return objeto;
   }
 }
 
