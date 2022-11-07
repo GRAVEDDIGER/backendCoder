@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,31 +8,66 @@
     <link rel="stylesheet" href="index.css">
     <title>API RESTful</title>
 </head>
-<body>
-<header>
-    <h1>API RESTful</h1>
-</header>
-<main>
-<section>
-    <h2>Acceso a API desde Form</h2>
-    <article>
-        <h3>Agregar Productos</h3>
-        <form class="formulario" action="#">
-            <input type="text" placeholder="Title" name="title" class="inputText" >
-            <input type="text" placeholder="Image URL" name="url" class="inputText" >
-            <input type="number" placeholder="Price" name="price" class="inputText" >
-        </form>
-        <button type="button"  class="botonAgregar" >Agregar</button>
 
-    </article>
-</section>
-</main>
-<footer>
-    <p>CoderHouse</p>
-    <p>Desafio API RESTful</p>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<body>
+    <header>
+        <h1 id="titulo">API RESTful</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Acceso a API desde Form</h2>
+
+            <div class="colContainer">
+                <article>
+                    <h3>Agregar Productos</h3>
+                    <form class="formulario" action="#">
+                        <input type="text" placeholder="Title" name="title" class="inputText">
+                        <input type="text" placeholder="Image URL" name="url" class="inputText">
+                        <input type="number" placeholder="Price" name="price" class="inputText">
+                    </form>
+                    <button type="button" class="botonAgregar">Agregar</button>
+
+                </article>
+                <article>
+                    <h3>Buscar Producto</h3>
+                </article>
+            </div>
+            <h3>Listado de Productos</h3>
+            <article>
+                <table>
+                    <thead>
+
+                        <th>Titulo</th>
+                        <th>Imagen</th>
+                        <th>Price</th>
+                        <th>ID</th>
+                        <th>Actions</th>
+
+                    </thead>
+                    <tbody id="cuerpo">
+
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>CoderHouse</p>
+        <p>Desafio API RESTful</p>
+    </footer>
+    <template id="rowTemplate">
+        <tr>
+            <td class="col"></td>
+            <td class="col"></td>
+            <td class="col"></td>
+            <td class="col"></td>
+            <td class="col"><button class="edit">edit</button>
+                <button class="erase">erase</button>
+            </td>
+        </tr>
+    </template>
 
     <script type="module" src="./products.js"></script>
 </body>
+
 </html>
