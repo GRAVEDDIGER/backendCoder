@@ -20,7 +20,7 @@ routes.get("/productoRandom", async (req, res) => {
   res.send(randomProduct);
 });
 
-routes.get("/productos/:id", async (req, res) => {
+routes.get("/producto/:id", async (req, res) => {
   const data = await dbManager.getById(this.version, parseInt(req.params.id));
   console.log(data);
   res.send(data);
@@ -30,7 +30,8 @@ routes.get("/productos/:id", async (req, res) => {
 //                  POST ROUTES                         //
 //////////////////////////////////////////////////////////
 
-routes.post("/productos", async (req, res) => {
+routes.post("/producto", async (req, res) => {
+  console.log(req.body);
   const objeto = await dbManager.addProduct(
     req.body.title,
     req.body.url,
@@ -45,7 +46,7 @@ routes.post("/productos", async (req, res) => {
 //           PUT ROUTES           //
 ////////////////////////////////////
 
-routes.put("/productos/:id", async (req, res) => {
+routes.put("/producto/:id", async (req, res) => {
   const resultado = await dbManager.modifyById(
     this.version,
     parseInt(req.params.id),
@@ -58,11 +59,12 @@ routes.put("/productos/:id", async (req, res) => {
 //           DELETE ROUTES        //
 ////////////////////////////////////
 
-routes.delete("/productos/:id", async (req, res) => {
+routes.delete("/producto/:id", async (req, res) => {
   const resultado = await dbManager.deleteById(
     this.version,
     parseInt(req.params.id)
   );
   res.send(resultado);
 });
+
 module.exports = routes;
