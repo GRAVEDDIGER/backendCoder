@@ -1,6 +1,3 @@
-const { Console } = require("console");
-const { Module } = require("module");
-
 const fs = require("fs").promises;
 class Storage {
   constructor(file) {
@@ -36,13 +33,15 @@ class Storage {
     return false;
   }
   async addProduct(title, url, price, version) {
-    if (this.version === 0) await this.loadFile();
-    if (this.version !== version) await this.loadFile();
+    await this.loadFile();
     let array = this.products;
+    console.log(array);
+    console.log(url);
     const maxIdConstant = (await this.maxIdItems()) + 1 || 0;
     const objeto = { title, url, price, id: maxIdConstant };
     array.push(objeto);
     this.products = array;
+    console.log("nuevo", this.products);
     this.saveFile();
     this.maxId = this.maxId + 1;
     this.increaseCount(1);
