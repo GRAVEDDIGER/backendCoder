@@ -4,9 +4,9 @@
 ### Backend:
 
 El Backend de la aplicacion esta conformado por 3 archivos.
-*1 server.js que abre el servidor en el puerto 8080 y usa los middlewares que necesita para funcionar
-*2 storage.js que es un manejador de archivos el cual permite las aplicaciones basicas del CRUD.
-\*3 productroutes.js Contiene las rutas y provee la funcionalidad a la api.
+-1 server.js que abre el servidor en el puerto 8080 y usa los middlewares que necesita para funcionar
+-2 storage.js que es un manejador de archivos el cual permite las aplicaciones basicas del CRUD.
+-3 productroutes.js Contiene las rutas y provee la funcionalidad a la api.
 El Backend se encuentra cargado en glitch
 https://graceful-octagonal-perigee.glitch.me/
 
