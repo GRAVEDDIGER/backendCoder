@@ -4,7 +4,7 @@ const url = "https://graceful-octagonal-perigee.glitch.me/api";
 let buttonToggler = false;
 let products = await fetch(url + "/productos");
 products = await products.json();
-const addProduct = async (url, data) => {
+const addProduct = async (url, data, e) => {
   if (buttonToggler === false) {
     const response = await fetch(url + "/productos", {
       method: "POST",
@@ -23,8 +23,20 @@ const addProduct = async (url, data) => {
       tbodyElement.appendChild(templateUpdate(template, products.length - 1));
     } else console.log("Hubo un problema");
   } else {
+    console.log(e, "nada");
+    const response = await fetch(url + "/productos/" + e.target.name, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: data,
+    });
   }
+  location.reload();
 };
+
 const inputControlerHandler = () => {
   entradas.forEach((entrada) =>
     entrada.addEventListener("change", (evento) => {
@@ -48,7 +60,7 @@ enviar.addEventListener("click", (evento) => {
   console.log(evento);
   evento.preventDefault();
   const data = JSON.stringify(formData);
-  addProduct(url, data);
+  addProduct(url, data, evento);
 });
 const borrarElemento = async (id) => {
   const response = await fetch(url + "/productos/" + id.toString(), {
@@ -78,6 +90,8 @@ const listBuilder = () => {
   let contador = 0;
   const fragmento = new DocumentFragment();
   products.forEach((product, index) => {
+    const trMod = trTemplate.querySelector("tr");
+    trMod.setAttribute("id", products[contador].id);
     fragmento.appendChild(templateUpdate(trTemplate, contador));
     contador++;
   });
@@ -90,6 +104,7 @@ const listBuilder = () => {
       trActual.parentNode.removeChild(trActual);
     });
   });
+
   const modifyHandler = document.querySelectorAll(".edit");
   modifyHandler.forEach((buttonEdit) => {
     buttonEdit.addEventListener("click", (event) => {
@@ -103,9 +118,31 @@ const listBuilder = () => {
         event.target.innerHTML = "Edit";
       } else {
         buttonAdd.innerHTML = "Modificar";
+        buttonAdd.name = event.target.name;
         event.target.innerHTML = "Add";
       }
     });
   });
 };
 listBuilder();
+
+const buttonSearch = document.getElementById("search");
+buttonSearch.addEventListener("click", async (e) => {
+  e.preventDefault();
+  console.log("Adruab grisis");
+  const inputSearch = document.getElementById("inputSearch");
+  const valorInput = inputSearch.value;
+  console.log(valorInput);
+  const response = await fetch(url + "/productos/" + valorInput.toString());
+  const resultados = document.getElementById("results");
+  const objeto = await response.json();
+  console.log(objeto, "arrar");
+  if (objeto.length === 0)
+    resultados.innerHTML = "Error Producto no encontrado";
+  else {
+    resultados.innerHTML = `${objeto[0].title}
+   ${objeto[0].url}
+    ${objeto[0].price}
+    `;
+  }
+});

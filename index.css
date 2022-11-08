@@ -141,3 +141,13 @@ tr {
     margin: 1rem;
     outline: 1px solid #d5d5d5;
 }
+.searchForm{
+    max-width: 300px;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-wrap: wrap;
+}
+.searchForm p{
+    max-width: 300px;
+    overflow-wrap: break-word;
+}
