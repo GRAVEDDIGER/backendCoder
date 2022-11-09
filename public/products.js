@@ -2,11 +2,11 @@ let formData = {};
 const entradas = document.querySelectorAll(".inputText");
 const url = "https://graceful-octagonal-perigee.glitch.me/api";
 let buttonToggler = false;
-let products = await fetch(url + "/productos");
+let products = await fetch("/api/productos");
 products = await products.json();
 const addProduct = async (url, data, e) => {
   if (buttonToggler === false) {
-    const response = await fetch(url + "/productos", {
+    const response = await fetch("/api/productos", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,7 +24,7 @@ const addProduct = async (url, data, e) => {
     } else console.log("Hubo un problema");
   } else {
     console.log(e, "nada");
-    const response = await fetch(url + "/productos/" + e.target.name, {
+    const response = await fetch("/api/productos/" + e.target.name, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -63,7 +63,7 @@ enviar.addEventListener("click", (evento) => {
   addProduct(url, data, evento);
 });
 const borrarElemento = async (id) => {
-  const response = await fetch(url + "/productos/" + id.toString(), {
+  const response = await fetch("/api/productos/" + id.toString(), {
     method: "DELETE",
     mode: "cors",
   });
@@ -133,7 +133,7 @@ buttonSearch.addEventListener("click", async (e) => {
   const inputSearch = document.getElementById("inputSearch");
   const valorInput = inputSearch.value;
   console.log(valorInput);
-  const response = await fetch(url + "/productos/" + valorInput.toString());
+  const response = await fetch("/api/productos/" + valorInput.toString());
   const resultados = document.getElementById("results");
   const objeto = await response.json();
   console.log(objeto, "arrar");
